@@ -49,5 +49,13 @@ void write_sbcs(charset_spec const *charset, long int input_chr,
 	    return;
 	}
     }
+    // ISO646-DE replaces characters in the ASCII range with umlauts, e.g.
+    // there is no [ anymore. We need [ as part of many control sequences,
+    // e.g. cursor or function keys, but the binary search above will fail to
+    // find it in the translation table. Therefore, for any ASCII range
+    // characters that are not found, simply emit them untranslated.
+    if (charset->charset == CS_ISO646_DE && input_chr < 0x80) {
+        emit(emitctx, input_chr);
+    }
     emit(emitctx, ERROR);
 }

@@ -14,6 +14,7 @@
  */
 typedef enum {
     CS_NONE,			       /* used for reporting errors, etc */
+    CS_ISO646_DE,
     CS_ISO8859_1,
     CS_ISO8859_1_X11,		       /* X font encoding with VT100 glyphs */
     CS_ISO8859_2,
